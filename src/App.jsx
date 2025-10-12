@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Search from './components/search/Search';
-import Spinner from './components/search/spinner/Spinner';
+import Spinner from './components/spinner/Spinner';
+import MovieCard from './components/movie-card/MovieCard';
 
 const API_BASE_URL = `https://api.themoviedb.org/3`;
 const API_OPTIONS = {
@@ -63,12 +64,7 @@ function App() {
                 <div className='movie-grid'>
                   {
                     movies.map((movie) => (
-                      <div key={movie.id} className='movie-card'>
-                        <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : '/no-movie.png'} alt={movie.title} />
-                        <div className='content'>
-                          <h3>{movie.title}</h3>
-                        </div>
-                      </div>
+                      <MovieCard key={movie.id} movie={movie}/>
                     ))
                   }
                 </div>
