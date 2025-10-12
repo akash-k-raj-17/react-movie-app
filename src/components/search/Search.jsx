@@ -1,4 +1,4 @@
-function Search( {searchTerm, setSearchTerm} ) {
+function Search( {searchTerm, onChange} ) {
   return (
     <div className='search'>
         <div>
@@ -6,7 +6,7 @@ function Search( {searchTerm, setSearchTerm} ) {
             <input type="text"
             placeholder='Search through thousands of movies'
             value={searchTerm} 
-            onChange={(e) => setSearchTerm(e.target.value)}/>
+            onChange={onChange}/>
         </div>
     </div>
   )
