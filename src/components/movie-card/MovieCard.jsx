@@ -1,20 +1,22 @@
 function MovieCard({movie}) {
     
-    const {poster_path, title, id, vote_average, original_language, release_date} = movie
+    const {poster_path, title, vote_average, original_language, release_date} = movie
 
     return (
-    <div key={id} className='movie-card'>
-    <   img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : '/no-png'} alt={title} />
-        <h3>{title}</h3>
-        <div className='content'>
-            <div className="rating">
-                <img src="/star.svg" alt="star" />
-                <p>{vote_average.toFixed(1)}</p>
+    <div className='movie-card'>
+        <img src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : '/no-movie.png'} alt={title} />
+        <div className="mt-4">
+            <h3>{title}</h3>
+            <div className='content'>
+                <div className="rating">
+                    <img src="/star.svg" alt="star" />
+                    <p>{vote_average ? vote_average.toFixed(1) : 'N/A'}</p>
+                </div>
+                <span className="text-white mx-1">•</span>
+                <p className="lang">{original_language ? original_language : 'N/A'}</p>
+                <span className="text-white mx-1">•</span>
+                <p className="year">{release_date ? release_date.split('-')[0] : 'N/A'}</p>
             </div>
-            <p className="text-white">•</p>
-            <p className="lang">{original_language}</p>
-            <p className="text-white">•</p>
-            <p className="year">{release_date.split('-')[0]}</p>
         </div>
     </div>
   )

@@ -18,10 +18,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (query = '') => {
     try {
 
-      const endpoint = `${API_BASE_URL}/discover/movie`
+      const endpoint = query ? `https://api.themoviedb.org/3/search/movie?query=${query}` : `${API_BASE_URL}/discover/movie`
       const response = await fetch(endpoint, API_OPTIONS);
       const data = await response.json();
 
@@ -43,8 +43,8 @@ function App() {
   }
   
   useEffect( () => {
-    fetchMovies()
-  }, [])
+    fetchMovies(searchTerm)
+  }, [searchTerm])
 
   return (
     <main>
@@ -61,13 +61,15 @@ function App() {
               isLoading ? (
                 <Spinner/>
               ) :
-                <div className='movie-grid'>
+                <ul className='movie-grid'>
                   {
                     movies.map((movie) => (
-                      <MovieCard key={movie.id} movie={movie}/>
+                      <li key={movie.id}>
+                        <MovieCard movie={movie}/>
+                      </li>
                     ))
                   }
-                </div>
+                </ul>
             }
           </section>
         </div>
