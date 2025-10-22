@@ -61,6 +61,18 @@ app.post('/api/search', async (req,res) => {
 
 })
 
+app.get('/api/movies',  async (req, res) => {
+    try {
+        const response = await collection.find({})
+                        .sort({count : -1})
+                        .limit(5)
+                        .toArray();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json( { message : 'Internal server error' });
+    }
+})
+
 connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
